@@ -1,0 +1,49 @@
+`timescale 1ns / 1ps 
+module Full_adder_tb; 
+
+  // Inputs 
+  reg a; 
+  reg b; 
+  reg ci; 
+
+  // Outputs 
+  wire sum; 
+  wire carry; 
+
+  // Instantiate the Full Adder 
+  Full_adder uut ( 
+    .a(a),  
+    .b(b),  
+    .ci(ci),  
+    .sum(sum),  
+    .carry(carry) 
+  ); 
+
+  // Initialize inputs and apply test vectors 
+  initial begin 
+    // Initialize Inputs 
+    a = 0; b = 0; ci = 0; 
+    #10; // Wait 10 ns for global reset 
+
+    // Apply different test vectors 
+    a = 0; b = 0; ci = 0; #10; 
+    a = 0; b = 0; ci = 1; #10; 
+    a = 0; b = 1; ci = 0; #10; 
+    a = 0; b = 1; ci = 1; #10; 
+    a = 1; b = 0; ci = 0; #10; 
+    a = 1; b = 0; ci = 1; #10; 
+    a = 1; b = 1; ci = 0; #10; 
+    a = 1; b = 1; ci = 1; #10; 
+
+    // End of test 
+    $finish; 
+  end 
+
+  // Monitor changes in signals 
+  initial begin 
+    $monitor("At time %t, a = %b, b = %b, ci = %b: sum = %b, carry = %b", $time, a, b, ci,       sum, carry); 
+
+  end 
+endmodule 
+
+ 
