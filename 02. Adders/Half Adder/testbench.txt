@@ -1,0 +1,29 @@
+`timescale 1ns / 1ps 
+module Half_adder_tb; 
+
+    // Testbench signals 
+    reg a, b;           // Inputs to the half adder 
+    wire sum, carry;    // Outputs from the half adder 
+
+    // Instantiate the Half_Adder module 
+    Half_adder uut ( 
+        .a(a),  
+        .b(b),  
+        .sum(sum),  
+        .carry(carry) 
+    ); 
+
+    // Testbench TESTBENCH CODE 
+    initial begin 
+    // Display the results 
+    $monitor("Time: %0t | a = %b, b = %b | sum = %b, carry = %b", $time, a, b, sum, carry); 
+    // Initialize inputs 
+        a = 0; b = 0; #10;  // Apply inputs 0, 0 
+        a = 0; b = 1; #10;  // Apply inputs 0, 1 
+        a = 1; b = 0; #10;  // Apply inputs 1, 0 
+        a = 1; b = 1; #10;  // Apply inputs 1, 1 
+
+        // End simulation 
+        $finish; 
+    end 
+endmodule	 

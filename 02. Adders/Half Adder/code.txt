@@ -1,0 +1,7 @@
+`timescale 1ns / 1ps 
+module Half_adder(a, b, sum, carry); 
+input a, b;              // Input bits 
+output sum, carry;       // Output: sum and carry 
+xor g1(sum, a, b);       // sum = a ⊕ b 
+and g2(carry, a, b);     // carry = a · b 
+endmodule 
