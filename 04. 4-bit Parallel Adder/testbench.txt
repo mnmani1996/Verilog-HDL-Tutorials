@@ -1,0 +1,50 @@
+module Parallel_Adder_tb;
+    reg [3:0] A;      // 4-bit input A
+    reg [3:0] B;      // 4-bit input B
+    reg Cin;          // Carry-in
+    wire [3:0] Sum;   // 4-bit sum
+    wire Cout;        // Carry-out
+
+    Parallel_Adder uut (
+        .A(A),
+        .B(B),
+        .Cin(Cin),
+        .Sum(Sum),
+        .Cout(Cout)
+    );
+    initial begin
+
+        // Initialize inputs
+        A = 4'b0000; B = 4'b0000; Cin = 0;
+        #10; 
+        $display("A = %b, B = %b, Cin = %b, Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+
+        // Test case 1: 4'b0001 + 4'b0001 with Cin = 0
+        A = 4'b0001; B = 4'b0001; Cin = 0;
+        #10;
+        $display("A = %b, B = %b, Cin = %b, Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+
+        // Test case 2: 4'b1111 + 4'b1111 with Cin = 0
+        A = 4'b1111; B = 4'b1111; Cin = 0;
+        #10;
+        $display("A = %b, B = %b, Cin = %b, Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+
+        // Test case 3: 4'b0101 + 4'b0011 with Cin = 1
+        A = 4'b0101; B = 4'b0011; Cin = 1;
+        #10;
+        $display("A = %b, B = %b, Cin = %b, Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+
+        // Test case 4: 4'b1001 + 4'b1001 with Cin = 1
+        A = 4'b1001; B = 4'b1001; Cin = 1;
+        #10;
+        $display("A = %b, B = %b, Cin = %b, Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+
+        // Test case 5: 4'b1111 + 4'b0001 with Cin = 1
+        A = 4'b1111; B = 4'b0001; Cin = 1;
+        #10;
+        $display("A = %b, B = %b, Cin = %b, Sum = %b, Cout = %b", A, B, Cin, Sum, Cout);
+
+        // End simulation
+        $finish;
+    end
+endmodule
