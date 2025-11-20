@@ -1,0 +1,17 @@
+module fs(a,b,c,di,ba);
+    input a;
+    input b; 
+    input c; 
+    output di; 
+    output ba;
+
+wire an, w1, w2, w3;
+
+not (an, a);
+and (w1, an, b);
+and (w2, b, c);
+and (w3, an, c);
+or (ba, w1, w2, w3);
+xor (di, a, b, c);
+
+endmodule
