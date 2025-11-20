@@ -1,5 +1,4 @@
-
-module Parellel_Adder (
+module Parallel_Adder (
     input [3:0] A,      // 4-bit input A
     input [3:0] B,      // 4-bit input B
     input Cin,          // Carry-in
@@ -70,3 +69,4 @@ module full_adder (
     or G5(Cout, C1, C2);
 
 endmodule
+
