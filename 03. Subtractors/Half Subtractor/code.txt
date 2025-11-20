@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps 
 module hs_st(a,b,di,ba);
 input a,b;
 output di,ba;
@@ -6,3 +7,4 @@ not g1(w,a);
 xor g2(di,a,b);
 and g3(ba,w,b);
 endmodule
+
