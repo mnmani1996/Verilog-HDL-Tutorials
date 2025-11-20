@@ -1,0 +1,53 @@
+module fs_tb;
+    // Inputs
+    reg a;  // Input a
+    reg b;  // Input b
+    reg c;  // Input c (borrow or carry input)
+
+    // Outputs
+    wire di;  // Difference or sum output
+    wire ba;  // Borrow or carry output
+
+    // Instantiate the ss module
+    ss uut (
+        .a(a),
+        .b(b),
+        .c(c),
+        .di(di),
+        .ba(ba)
+    );
+
+    // Test input TESTBENCH CODE
+    initial begin
+        // Initialize inputs
+        a = 0; b = 0; c = 0;
+        #10; // Wait 10ns
+        
+        // Apply test vectors with #10 delays
+        a = 0; b = 0; c = 0;
+        #10;
+        a = 0; b = 0; c = 1;
+        #10;
+        a = 0; b = 1; c = 0;
+        #10;
+        a = 0; b = 1; c = 1;
+        #10;
+        a = 1; b = 0; c = 0;
+        #10;
+        a = 1; b = 0; c = 1;
+        #10;
+        a = 1; b = 1; c = 0;
+        #10;
+        a = 1; b = 1; c = 1;
+        #10;
+        
+        // End simulation
+        $finish;
+    end
+
+    // Monitor changes and display output
+    initial begin
+        $monitor("Time = %0dns | a = %b, b = %b, c = %b | di = %b, ba = %b",
+                 $time, a, b, c, di, ba);
+    end
+endmodule
