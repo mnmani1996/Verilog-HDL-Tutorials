@@ -1,0 +1,72 @@
+
+module Parellel_Adder (
+    input [3:0] A,      // 4-bit input A
+    input [3:0] B,      // 4-bit input B
+    input Cin,          // Carry-in
+    output [3:0] Sum,   // 4-bit sum
+    output Cout         // Carry-out
+);
+
+    wire C1, C2, C3;    // Internal carry signals
+
+    // Full Adder 1 (Least Significant Bit)
+    full_adder FA0 (
+        .A(A[0]),
+        .B(B[0]),
+        .Cin(Cin),
+        .Sum(Sum[0]),
+        .Cout(C1)
+    );
+
+    // Full Adder 2
+    full_adder FA1 (
+        .A(A[1]),
+        .B(B[1]),
+        .Cin(C1),
+        .Sum(Sum[1]),
+        .Cout(C2)
+    );
+
+// Full Adder 3
+    full_adder FA2 (
+        .A(A[2]),
+        .B(B[2]),
+        .Cin(C2),
+        .Sum(Sum[2]),
+        .Cout(C3)
+    );
+
+    // Full Adder 4 (Most Significant Bit)
+    full_adder FA3 (
+        .A(A[3]),
+        .B(B[3]),
+        .Cin(C3),
+        .Sum(Sum[3]),
+        .Cout(Cout)
+    );
+
+endmodule
+
+// Full Adder Module using Gate-Level Modeling
+module full_adder (
+    input A,       // Input A
+    input B,       // Input B
+    input Cin,     // Carry-in
+    output Sum,    // Sum output
+    output Cout    // Carry-out
+);
+
+    wire S1, C1, C2; // Internal wires
+
+    // Half Adder 1
+    xor G1(S1, A, B);
+    and G2(C1, A, B);
+
+    // Half Adder 2
+    xor G3(Sum, S1, Cin);
+    and G4(C2, S1, Cin);
+
+    // OR Gate for final carry
+    or G5(Cout, C1, C2);
+
+endmodule
