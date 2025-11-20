@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps 
 module hs_tb;
     reg a, b;
     wire di, ba;
@@ -19,3 +20,4 @@ module hs_tb;
         $finish; // Ends the simulation
     end
 endmodule
+
