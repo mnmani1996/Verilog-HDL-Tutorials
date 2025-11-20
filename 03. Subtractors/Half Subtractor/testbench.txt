@@ -1,0 +1,21 @@
+module hs_tb;
+    reg a, b;
+    wire di, ba;
+
+    hs uut (
+        .a(a),
+        .b(b),
+        .di(di),
+        .ba(ba)
+    );
+
+    initial begin
+        $monitor("Time = %0t: a = %b, b = %b, di = %b, ba = %b", $time, a, b, di, ba);
+        a = 0; b = 0; #10;
+        a = 0; b = 1; #10;
+        a = 1; b = 0; #10;
+        a = 1; b = 1; #10;
+
+        $finish; // Ends the simulation
+    end
+endmodule
