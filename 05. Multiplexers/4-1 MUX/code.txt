@@ -1,0 +1,15 @@
+module mux4tol(out,i0,i1,i2,i3,s1,s0);
+output out;
+input i0,i1,i2,i3;
+input s1,s0;
+wire sn1,sn0;
+wire y0,y1,y2,y3;
+not n1(sn1,s1);
+not n2(sn0,s0);
+and and1(y0,i0,sn1,sn0);
+and and2(y1,i1,sn1,s0);
+and and3(y2,i2,s1,sn0);
+and and4(y3,i3,s1,s0);
+or or1(out,y0,y1,y2,y3);
+endmodule
+
