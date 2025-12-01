@@ -1,0 +1,51 @@
+module tb_mux8to1;
+
+  // Testbench variables
+  reg i0, i1, i2, i3, i4, i5, i6, i7;
+  reg s0, s1, s2;
+  wire out;
+
+  // Instantiate the MUX
+  mux8to1_gate uut (
+    .out(out),
+    .i0(i0), .i1(i1), .i2(i2), .i3(i3),
+    .i4(i4), .i5(i5), .i6(i6), .i7(i7),
+    .s0(s0), .s1(s1), .s2(s2)
+  );
+
+  initial begin
+    $display("Time\t s2 s1 s0 | i0 i1 i2 i3 i4 i5 i6 i7 | out");
+    $monitor("%0t\t  %b  %b  %b  |  %b  %b  %b  %b  %b  %b  %b  %b  |  %b",
+             $time, s2, s1, s0, i0, i1, i2, i3, i4, i5, i6, i7, out);
+
+    // Set all inputs to 0
+    {i0, i1, i2, i3, i4, i5, i6, i7} = 8'b00000000;
+
+    // Test case 1: select i0
+    {i0, s2, s1, s0} = {1'b1, 3'b000}; #10;
+
+    // Test case 2: select i1
+    {i0, i1} = 2'b0_1; {s2, s1, s0} = 3'b001; #10;
+
+    // Test case 3: select i2
+    {i1, i2} = 2'b0_1; {s2, s1, s0} = 3'b010; #10;
+
+    // Test case 4: select i3
+    {i2, i3} = 2'b0_1; {s2, s1, s0} = 3'b011; #10;
+
+    // Test case 5: select i4
+    {i3, i4} = 2'b0_1; {s2, s1, s0} = 3'b100; #10;
+
+    // Test case 6: select i5
+    {i4, i5} = 2'b0_1; {s2, s1, s0} = 3'b101; #10;
+
+    // Test case 7: select i6
+    {i5, i6} = 2'b0_1; {s2, s1, s0} = 3'b110; #10;
+
+    // Test case 8: select i7
+    {i6, i7} = 2'b0_1; {s2, s1, s0} = 3'b111; #10;
+
+    $finish;
+  end
+endmodule
+
