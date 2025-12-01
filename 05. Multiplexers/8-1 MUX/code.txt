@@ -1,0 +1,29 @@
+module mux8to1(
+    output out,
+    input i0, i1, i2, i3, i4, i5, i6, i7,
+    input s0, s1, s2
+);
+
+    wire ns0, ns1, ns2;
+    wire w0, w1, w2, w3, w4, w5, w6, w7;
+
+    // Invert select lines
+    not (ns0, s0);
+    not (ns1, s1);
+    not (ns2, s2);
+
+    // AND gates for selection
+    and (w0, i0, ns2, ns1, ns0); // 000
+    and (w1, i1, ns2, ns1,  s0); // 001
+    and (w2, i2, ns2,  s1, ns0); // 010
+    and (w3, i3, ns2,  s1,  s0); // 011
+    and (w4, i4,  s2, ns1, ns0); // 100
+    and (w5, i5,  s2, ns1,  s0); // 101
+    and (w6, i6,  s2,  s1, ns0); // 110
+    and (w7, i7,  s2,  s1,  s0); // 111
+
+    // OR gate to combine results
+    or (out, w0, w1, w2, w3, w4, w5, w6, w7);
+
+endmodule
+
