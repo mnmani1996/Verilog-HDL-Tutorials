@@ -1,0 +1,46 @@
+`timescale 1ns / 1ps 
+module test_mux4tol;
+
+    // Inputs
+    reg i0, i1, i2, i3;
+    reg s1, s0;
+
+    // Output
+    wire out;
+
+    // Instantiate the MUX module
+    mux4tol uut (
+        .out(out),
+        .i0(i0),
+        .i1(i1),
+        .i2(i2),
+        .i3(i3),
+        .s1(s1),
+        .s0(s0)
+    );
+
+    initial begin
+        // Monitor signals
+        $monitor("Time=%0t | s1=%b s0=%b | i0=%b i1=%b i2=%b i3=%b | out=%b", 
+                 $time, s1, s0, i0, i1, i2, i3, out);
+
+        // Test case 1
+        i0 = 1; i1 = 0; i2 = 0; i3 = 0; s1 = 0; s0 = 0; #10;
+        if (out !== i0) $display("Test Failed for s1=0, s0=0");
+        
+        // Test case 2
+        i0 = 0; i1 = 1; i2 = 0; i3 = 0; s1 = 0; s0 = 1; #10;
+        if (out !== i1) $display("Test Failed for s1=0, s0=1");
+        
+        // Test case 3
+        i0 = 0; i1 = 0; i2 = 1; i3 = 0; s1 = 1; s0 = 0; #10;
+        if (out !== i2) $display("Test Failed for s1=1, s0=0");
+        
+        // Test case 4
+        i0 = 0; i1 = 0; i2 = 0; i3 = 1; s1 = 1; s0 = 1; #10;
+        if (out !== i3) $display("Test Failed for s1=1, s0=1");
+
+        $finish;
+    end
+endmodule
+
