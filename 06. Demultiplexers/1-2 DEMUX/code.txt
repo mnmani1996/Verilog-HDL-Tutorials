@@ -1,0 +1,11 @@
+module demux1to2(out0, out1, in, s0);
+  output out0, out1;
+  input in, s0;
+  wire sn0;
+  
+  not n1(sn0, s0);
+  and g1(out0, in, sn0);
+  and g2(out1, in, s0);
+  
+endmodule
+
